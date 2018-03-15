@@ -184,7 +184,10 @@ padding-right: 0px !important;
 
 .head{
 	text-align:center;
-	margin:100px;
+	padding:180px;
+	/*margin:-60px;*/
+	background:url('https://images.pexels.com/photos/265047/pexels-photo-265047.jpeg');
+	background-size: 110%;
 	
 }
 
@@ -193,14 +196,16 @@ padding-right: 0px !important;
 }
 
 .background{
-	background:#337ab7;
+	/*background:#337ab7;*/
+	
+	font-family:cursive;
 }
 
 .navbar > li :hover{
 	color: red!important;
 	font-size:3em;
-	font-family: monospace;
-	
+	font-family:arial;
+	font-weight: 900;
 }
 
 .bg-text{
@@ -210,5 +215,18 @@ padding-right: 0px !important;
 
 .md-text{
 	font-size: 3em;
+	
+}
+
+.section2{
+	margin:200px;
+	font-size:1.4em;
+	line-height: 40px;
+}
+.footer{
+	text-align:center;
+	padding:20px;
+	margin-top:0px;
+	background:palegreen;
 	
 }
