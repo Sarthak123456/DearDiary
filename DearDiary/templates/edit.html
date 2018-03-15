@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+     <div class='row'>
+         <div class='col-md-12'>
+             
+       
+     <form action="/update/{{ dog.id }}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <label for="title"><textarea class="form-control col-md-12" rows="1" cols="85" name="title" id="title" required>{{ dog.title }}</textarea></label>
+         <br>
+          <label for="description"><textarea rows="15" cols="110"  class="form-control col-md-12" name="description" id="description" value='{{ dog.description }}' required>{{ dog.description }}</textarea>
+          </label>
+          <br>
+          
+          <label for="image"><input type="file" name="image" id="image_update" value='/media/{{ dog.image }}' default='/media/{{ dog.image }}' ><img src='/media/{{ dog.image }}' width='100'/></label>
+          <br>
+          <button type="Submit"  class="btn btn-primary">Update</button>
+      </form>   
+        
+          </div>
+     </div>
+    </div>
+</div>
+</div>
+{% endblock %}

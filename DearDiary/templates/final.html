@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+    
+     <div class="row">
+         
+         <div class="col-md-8">
+             <h1><strong><small>{{ dog.title|title }}</small></strong></h1>
+             <p>{{ dog.description }}</p>
+         </div>
+         <div class='col-md-4'>
+             {% if dog.image %}
+             <img src='/media/{{ dog.image }}' class='img img-responsive' width='300'>
+              {% endif %}
+         </div>
+         
+     </div>
+     
+    </div>
+</div>
+
+{% endblock %}
