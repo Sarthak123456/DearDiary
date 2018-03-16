@@ -5,34 +5,35 @@
 <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Blank Page</li>
-        <li class='breadcrumb-item'><a href='/landing'>Landing</a></li>
-      </ol>
+      
       <div class="row">
         <div class="col-12">
         <form action="" id="image_form" name="image_form"  method="POST" enctype="multipart/form-data"  role="form">
          {% csrf_token %}
-         <input type="text" class="form-control col-md-9" name="title" placeholder="Title" id="title" required/>
+         <input type="text" class="form-control col-md-12" name="title" placeholder="Title" id="title" required/>
          <br>
-          <label for="description"><textarea rows="12" cols="150" class="form-control" name="description" id="description" placeholder="Description" required></textarea>
+          <label for="description"><textarea rows="15" cols="180" class="form-control" name="description" id="description" placeholder="Description" required></textarea>
           </label>
           <br>
+          </div>
+          </div>
+          <div class='row'>
+          <div class='col-md-4'>
           <label for="image">  <input type="file"  name="image" id="image"></label>
-          
-          <br>
-          <button type="Submit" value="Save" class="btn btn-primary">Save</button>
-            <a href="/view" class="btn btn-info">View All</a>
-      </form>
-       <br><div id='DIV_CONTAINING_FORM'></div>
-        <div class="progress">
+          </div>
+          <div class='col-md-2'>
+            <div class="progress ">
     <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
       0%
     </div>
         </div>
+          </div>
+          </div>
+          <button type="Submit" value="Save" class="btn btn-primary">Save</button>
+             
+      </form>
+      
+      
       
       </div>
     </div>

@@ -24,13 +24,13 @@ def Upload(request):
      dog = Post_image(
      image=request.FILES.get('image'))
      dog.save()
-    return redirect('/')
+    return redirect('/index')
     
 
 def index(request):
     #return HttpResponseRedirect("base.html")
     if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
-        request.session.set_expiry(6000)
+        request.session.set_expiry(600)
         query=request.GET.get('q')
         if query:
             return redirect('/view?q=%s' %query)
@@ -58,7 +58,7 @@ def error(request):
     
 def view(request):
     if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
-        request.session.set_expiry(6000)
+        request.session.set_expiry(600)
         user = request.user
     
         # dogs=Post.objects.all() #For seeing all entries 
@@ -86,7 +86,7 @@ def final(request, id):
     
 def edit(request, id):
     if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
-        request.session.set_expiry(6000)
+        request.session.set_expiry(600)
         query=request.GET.get('q')
         if query:
             return redirect('/view?q=%s' %query)
@@ -133,7 +133,7 @@ def login_view(request):
         user=authenticate(username=username, password=password)
         login(request,user)
        # print (request.user.is_authenticated())
-        return redirect("/")
+        return redirect("/index")
         
     return render(request, "form.html", {"form": form, "title" : title})
 

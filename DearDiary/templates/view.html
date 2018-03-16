@@ -4,14 +4,7 @@
 
 <div class="content-wrapper">
     <div class="container-fluid">
-      <div class='img-modal'>
-       <a class='image' href='#'>
-       <div class='title'>
-       <i class='fa fa-close'></i>
-     </div></a>
-            <img src='' class="img img-responsive change"/> 
-                <a href="/delete-image/{{ dog.id }}">Delete</a><br/>     
-</div>
+
 
        <table border="1" class='hide'>
           <thead>
@@ -75,7 +68,7 @@
          </div>
           <div class='col-md-4'>
          <a  href="/delete/{{ dog.id }}" class='demo'><i class="fa fa-close pull-right"></i></a>
-        <a  href="/edit/{{ dog.id }}" class='demo' ><i class="fa fa-pencil pull-right"></i></a>
+        <a  href="/edit/{{ dog.id }}" class='' ><i class="fa fa-pencil pull-right"></i></a>
         </div>
         </div>
         <div class='row'>
@@ -97,7 +90,14 @@
   </div>{% endif %}
               
 </div>
-
+      <div class='img-modal'>
+       <a class='image' href='#'>
+       <div class='title'>
+       <i class='fa fa-close'></i>
+     </div></a>
+            <img src='' class="img img-responsive change"/> 
+                <a href="/delete-image/{{ dog.id }}" class='demo'>Delete</a><br/>     
+</div>
  
      </div><!-- strip ends-->
  {% endfor %}

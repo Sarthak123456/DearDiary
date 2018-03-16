@@ -20,12 +20,13 @@ from django.contrib import admin
 from DearDiary.views import index,login_view, register_view, logout_view,index
 from DearDiary import views
 from django.contrib.auth import views as auth_views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',index),
+    url(r'^$',views.landing),
     url(r'^create$', views.create ),
-    url(r'^landing$', views.landing ),
+    url(r'^index$', index ),
     url(r'^view/$', views.view ),
     # url(r'^404/$', views.error ),
     url(r'^edit/(?P<id>\d+)$', views.edit),
@@ -44,8 +45,8 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     auth_views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
-    
 ]
+
 
 
 if settings.DEBUG:
