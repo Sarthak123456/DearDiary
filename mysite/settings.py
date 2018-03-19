@@ -25,7 +25,7 @@ SECRET_KEY = '%-xd9_&ae0q5d9e0$gr_210hkl+*xnbb7gztn_&mb%*h^8hvpn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'eba68fe8812541b4b6af6359c2a1e739.vfs.cloud9.us-east-2.amazonaws.com']
+ALLOWED_HOSTS = [u'b3093ba437444fdc8f411148dcb6a507.vfs.cloud9.us-east-2.amazonaws.com']
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.sendgrid.net'
