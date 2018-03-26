@@ -16,6 +16,10 @@ class UserLoginForm(forms.Form):
     
     def clean(self, *args, **kwargs):
         username=self.cleaned_data.get("username")
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise forms.ValidationError("Username not correct.Username is Case-Sensitive.")
         password=self.cleaned_data.get("password")
         if username and password:
             user=authenticate(username=username, password=password)
@@ -24,17 +28,10 @@ class UserLoginForm(forms.Form):
                     'Subject here',
                     'Here is the message.',
                     'sarthak.tuteja91@gmail.com',
-                    ['sarthak.tuteja91@gmail.com'],
+                    ['sarthak.tuteja@yahoo.com'],
                     fail_silently=False,
                 )
-                raise forms.ValidationError("This is not a valid user")
-               
-            if not user.check_password(password):
-                raise forms.ValidationError("Enter correct password")
-            if not user.is_active:
-                raise forms.ValidationError("User not valid")
-            
-                  
+                raise forms.ValidationError("Password not correct")
    
         return super(UserLoginForm, self).clean(*args, **kwargs)
         
