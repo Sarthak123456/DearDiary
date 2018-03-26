@@ -38,7 +38,16 @@ def index(request):
     else:
         return redirect("/login")
 def landing(request):
-    return render(request, "landing.html")  
+    form=UserLoginForm(request.POST or None)
+    title='Sign In'
+    if form.is_valid():
+        username=form.cleaned_data.get('username')
+        password=form.cleaned_data.get('password')
+        user=authenticate(username=username, password=password)
+        login(request,user)
+       # print (request.user.is_authenticated())
+        return redirect("/index")
+    return render(request, "landing.html", {'form': form, 'title': title})  
            
 def create(request):
    
@@ -159,10 +168,10 @@ def logout_view(request):
     logout(request)
     return redirect("/login")
     
-def posts_edit(request, id):
-    instance = Post.objects.get(id=id)
-    context={
-        'instance': instance
-    }
-    return render(request, 'modal.html', context)
+# def posts_edit(request, id):
+#     instance = Post.objects.get(id=id)
+#     context={
+#         'instance': instance
+#     }
+#     return render(request, 'modal.html', context)
     
