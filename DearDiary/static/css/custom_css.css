@@ -5,6 +5,12 @@
     For .omb_spanOr use @body-bg instead of white.
 */
 
+body{
+	
+	font-family: 'Cedarville Cursive', cursive!important;
+	
+}
+
 .strip {
 	border:1px black;
 	padding:20px;
@@ -255,7 +261,7 @@ padding-right: 0px !important;
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: red;
+  background-color: slategrey;
   color: #fff;
   border-radius: 5px;
   line-height: 30px;
