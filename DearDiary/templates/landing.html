@@ -1,0 +1,242 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" 
+
+content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta 
+
+name="author" content="">
+
+    <title>Dear Diary</title>
+
+    <!-- Bootstrap core CSS 
+
+-->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts 
+
+for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static '/css/one-page-wonder.min.css' %}" rel="stylesheet">
+    
+    
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <div class="container">
+        <a class="navbar-brand" 
+
+href="#">DearDiary</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="modal" data-target="#LoginModal">Login/Sign Up</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+ 
+
+   </nav>
+
+    <header class="masthead text-center text-white">
+      <div class="masthead-content">
+        <div 
+
+class="container">
+          <h1 class="masthead-heading mb-0">Dear Diary</h1>
+          <h2 class="masthead-subheading mb-0">A secret friend, who is more than a Friend!</h2>
+          <a href="/index" class="btn btn-primary btn-xl rounded-pill mt-5">Get Started</a>
+        </div>
+      </div>
+     
+    </header>
+
+    <section>
+      <div class="container">
+        <div 
+
+class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+           
+
+   <img class="img-fluid rounded-circle" src="{% static 'img/01.jpg' %}" alt="">
+            </div>
+          
+
+</div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h2 class="display-4">For Your Thoughts..</h2>
+              <p>Everyone has a public life, but Dear Diary is made kept in mind your private life. 
+    Share all the thoughts you wouldn't share with your friends, family or anyone!
+    to install social_auth:  pip install sudo python-social-auth[django], crispy_forms:sudo pip install django-crispy-forms and don't upgrade the pip as it fucks up the 
+    folder structure.
+    </p>
+            </div>
+          </div>
+        
+
+</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="p-5">
+              <img class="img-fluid rounded-circle" src="{% static 'img/02.jpeg' %}"  alt="">
+            </div>
+          </div>
+          <div 
+
+class="col-lg-6">
+            <div class="p-5">
+              <h2 class="display-4">Diary Without A Diary!</h2>
+             
+
+ <p> There are a lot of things you can't say to people so just lighten your heart through Dear Diary.
+    Write your thoughts down, use it to take notes, or just write Journals on the Go without carrying a physical diary.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      
+
+<div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+    
+
+        <div class="p-5">
+              <img class="img-fluid rounded-circle" src="{% static 'img/03.jpeg' %}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+ 
+
+             <h2 class="display-4">Cherish Your Day!</h2>
+              <p>   You can even upload Images to cherish your day and come back and see your thoughts anytime, anywhere without the fear of it being lost,
+              stolen or even read by random persons. And really soon you can even upload pdfs, text files, images of your previous diaries so that you have a centralised diary
+              which is secure to it's limits.</p>
+      
+
+      </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-black">
+      <div class="container">
+        <p class="m-0 text-center text-white small">Copyright &copy; DearDiary 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+     
+    <!-- Login Modal-->
+   
+    <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <h5 class="modal-title" >Login</h5>
+            
+          </div>
+          <div class="modal-body">
+               
+<div class="container">
+    <div class="omb_login">
+    	<h3 class="omb_authTitle"><span class='log-in'>Login</span> or <span class='sign-up'><a href="#" class='signup'>Sign up</a></span></h3>
+    	
+		<div class="row   omb_socialButtons">
+    	    <div class="col-xs-4  col-sm-12">
+		        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-lg btn-block omb_btn-facebook">
+			        <i class="fa fa-facebook visible-xs"></i>
+			        <span class="hidden-xs">Facebook</span>
+		        </a>
+	        </div>
+        	<!--  <div class="col-xs-4 col-sm-2">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+			        <i class="fa fa-twitter visible-xs"></i>
+			        <span class="hidden-xs">Twitter</span>
+		        </a>
+	        </div>	
+        	<div class="col-xs-4 col-sm-2">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-google">
+			        <i class="fa fa-google-plus visible-xs"></i>
+			        <span class="hidden-xs">Google+</span>
+		        </a>
+	        </div> -->
+		</div>
+
+		<div class="row  omb_loginOr">
+			<div class="col-xs-12  col-sm-12">
+				<hr class="omb_hrOr">
+				<span class="omb_spanOr">or</span>
+			</div>
+		</div>
+
+		<div class="row  ">
+			<div class="col-xs-12  col-sm-12">	
+			    <form class="omb_loginForm" action="?" autocomplete="on" method="POST">
+			      {% csrf_token %}
+			      {{ form|crispy }}
+			      <button class="btn btn-lg btn-primary btn-block" type="submit" id='sign-in'>{{ title }}</button>
+			</div>
+    	</div>
+		<div class="row  ">
+			
+			<div class="col-xs-12  col-sm-12">
+				<p class="omb_forgotPwd">
+					<a href="#">Forgot password?</a>
+				</p>
+			</div>
+		</div>	    	
+	</div>
+
+
+
+        </div>
+    </div>
+ </div>
+
+      </div>
+    </div>
+    
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  </body>
+
+</html>
