@@ -269,3 +269,11 @@ padding-right: 0px !important;
   text-align: center;
   cursor: pointer
 }
+
+.error{
+	
+	font-family: sans-serif;
+	color: silver;
+	text-align: center;
+	
+}

@@ -1,0 +1,2 @@
+to install social_auth: pip install sudo python-social-auth[django], crispy_forms:sudo pip install 
+django-crispy-forms and don't upgrade the pip as it fucks up the folder structure.
