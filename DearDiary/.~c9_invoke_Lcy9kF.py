@@ -69,11 +69,10 @@ def create(request):
     if request.method=="POST":
      dog = Post(title=request.POST['title'],
      description=request.POST['description'],
+     image=request.FILES.getlist('image[]'),
      created_by_user=user)
-     dogs=Post_image(image=request.FILES.get('image'))
      import pdb; pdb.set_trace()
      dog.save()
-     dogs.save()
     return redirect("/")
         
 def error(request):
@@ -95,9 +94,7 @@ def view(request):
         
             ).distinct()
         context={ 'dogs': dogs}
-        import pdb; pdb.set_trace()
         return render(request, 'view.html', context)
-        
     else:
         messages.info(request, 'Session Expired')
         return redirect("/login")

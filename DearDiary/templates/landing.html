@@ -30,7 +30,7 @@ for this template -->
     <!-- Custom styles for this template -->
     <link href="{% static '/css/one-page-wonder.min.css' %}" rel="stylesheet">
     
-    
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}"/>
 
   </head>
 
@@ -80,7 +80,7 @@ class="row align-items-center">
             <div class="p-5">
            
 
-   <img class="img-fluid rounded-circle" src="{% static 'img/01.jpg' %}" alt="">
+   <!--<img class="img-fluid rounded-circle" src="{% static 'img/01.jpg' %}" alt="">-->
             </div>
           
 
@@ -105,7 +105,7 @@ class="row align-items-center">
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="p-5">
-              <img class="img-fluid rounded-circle" src="{% static 'img/02.jpeg' %}"  alt="">
+              <!--<img class="img-fluid rounded-circle" src="{% static 'img/02.jpeg' %}"  alt="">-->
             </div>
           </div>
           <div 
@@ -132,7 +132,7 @@ class="col-lg-6">
     
 
         <div class="p-5">
-              <img class="img-fluid rounded-circle" src="{% static 'img/03.jpeg' %}" alt="">
+              <!--<img class="img-fluid rounded-circle" src="{% static 'img/03.jpeg' %}" alt="">-->
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">
@@ -169,6 +169,7 @@ class="col-lg-6">
           <div class="modal-header">
             
             <h5 class="modal-title" >Login</h5>
+            <a href='#' class="close" data-dismiss="modal">&times;</a>
             
           </div>
           <div class="modal-body">
@@ -206,11 +207,19 @@ class="col-lg-6">
 		</div>
 
 		<div class="row  ">
-			<div class="col-xs-12  col-sm-12">	
-			    <form class="omb_loginForm" action="?" autocomplete="on" method="POST">
+			<div class="col-xs-12  col-sm-12" id="login_form">	
+			    <form class="omb_loginForm" action="/login/" autocomplete="on" method="POST">
 			      {% csrf_token %}
-			      {{ form|crispy }}
+			      {{ login_form|crispy }}
 			      <button class="btn btn-lg btn-primary btn-block" type="submit" id='sign-in'>{{ title }}</button>
+			     </form>
+			</div>
+			<div class="col-xs-12  col-sm-12" id="register_form" style='display:none;'>	
+			    <form class="omb_loginForm" action="/register/" autocomplete="on" method="POST">
+			      {% csrf_token %}
+			      {{ register_form|crispy }}
+			      <button class="btn btn-lg btn-primary btn-block" type="submit" id='sign-in'>{{ title }}</button>
+			     </form>
 			</div>
     	</div>
 		<div class="row  ">

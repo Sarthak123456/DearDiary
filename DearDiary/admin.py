@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post,Post_image
+from .models import Post
 
 class PostAdmins(admin.ModelAdmin):
     search_fields = ["created_by_user__username"]

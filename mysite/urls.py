@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^edit/(?P<id>\d+)$', views.edit),
     url(r'^final/(?P<id>\d+)$', views.final),
     url(r'^update/(?P<id>\d+)$', views.update),
-    url(r'^upload/$', views.Upload),
+    # url(r'^upload/$', views.Upload),
     url(r'^delete/(?P<id>\d+)$', views.delete),
     url(r'^login/$', login_view, name="login"),
     url(r'^logout/$', logout_view, name="logout"),

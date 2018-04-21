@@ -21,6 +21,7 @@ class UserLoginForm(forms.Form):
         except User.DoesNotExist:
             raise forms.ValidationError("Username not correct.Username is Case-Sensitive.")
         password=self.cleaned_data.get("password")
+        
         if username and password:
             user=authenticate(username=username, password=password)
             if not user:
@@ -62,5 +63,5 @@ class UserRegisterForm(forms.ModelForm):
             
         return email
             
-   
+ 
    
