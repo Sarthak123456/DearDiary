@@ -4,38 +4,41 @@
 
 <div class="content-wrapper">
     <div class="container-fluid">
-        {% if dogs %}
-    {% for dog in dogs %}
+        {% if posts %}
+    {% for post in posts %}
     </div>
     <div class="strip">
         <div class="row">
            
         <div class='col-md-8'>
-         <h6><a href="/final/{{ dog.id }}" class="nav-link js-create-book" data-toggle="modal" data-target="#exampleModal">{{ dog.title|title }}</a></h6>
+         <h6><a href="/final/{{ post.id }}" class="nav-link js-create-book" data-toggle="modal" data-target="#exampleModal">{{ post.title|title }}</a></h6>
          </div>
           <div class='col-md-4'>
-         <a  href="/delete/{{ dog.id }}" class='demo'><i class="fa fa-close pull-right"></i></a>
-        <a  href="/edit/{{ dog.id }}" class='' ><i class="fa fa-pencil pull-right"></i></a>
+         <a  href="/delete/{{ post.id }}" class='demo'><i class="fa fa-close pull-right"></i></a>
+        <a  href="/edit/{{ post.id }}" class='' ><i class="fa fa-pencil pull-right"></i></a>
         </div>
         </div>
         <div class='row'>
          <div class="col-md-10">
              <div class="descrip">
-         <p><small>{{ dog.description|truncatechars:250 }}</small>
+         <p><small>{{ post.description|truncatechars:250 }}</small>
         </p>
 
 </div><!-- descrip ends-->
-<p><small><strong>{{ dog.created_at }}</strong></small></p>
+<p><small><strong>{{ post.created_at }}</strong></small></p>
 <!-- <p><small><strong>{{ dog.updated_at }}</strong></small></p> -->
 </div><!-- col-md-9 ends-->
 
 <div class="col-md-2 center">
-    {% if dog.image %}
-               <a href='#'><img src='/media/{{ dog.image }}' class="img img-responsive image " width='100'/> </a><br>
-                 <div class="middle">
-    <div class="text"><a href="/delete-image/{{ dog.id }}" class='demo'><i class='fa fa-close'></i></a></div>
+   
+   {% for image in post.post_image_set.all %}<!--first post is for the "for loop" second post for the post field in model and all is for all images I guess.-->
+   {{ image.image }}
+   <a href='#'><img src='{{ image.image.url }}' class="img img-responsive image " width='100'/> </a><br>
+   <div class="middle">
+    <div class="text"><a href="/delete-image/{{ image.id }}" class='demo'><i class='fa fa-close'></i></a></div>
   </div>
-              {% endif %}
+   {% endfor %}
+
 </div>
 
 
@@ -44,8 +47,8 @@
        <div class='title'>
        <i class='fa fa-close'></i>
      </div></a>
-            <img src='' class="img img-responsive change"/> 
-                <a href="/delete-image/{{ dog.id }}" class='demo'>Delete</a><br/>     
+            <img src='{{ image.image.url }}' class="img img-responsive change"/> 
+                <a href="/delete-image/{{ image.id }}" class='demo'>Delete</a><br/>     
 </div>
  
      </div><!-- strip ends-->
