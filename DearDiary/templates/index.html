@@ -10,9 +10,9 @@
         <div class="col-12">
         <form action="" id="image_form" name="image_form"  method="POST" enctype="multipart/form-data"  role="form">
          {% csrf_token %}
-         <input type="text" class="form-control col-md-12" name="title" placeholder="Title" id="title" />
+         <input type="text" class="form-control col-md-12" name="title" placeholder="Title" id="title" required />
          <br>
-          <label for="description"><textarea rows="15" cols="180" class="form-control" name="description" id="description" placeholder="Description" ></textarea>
+          <label for="description"><textarea rows="15" cols="180" class="form-control" name="description" id="description" placeholder="Description" required></textarea>
           </label>
           <br>
           </div>

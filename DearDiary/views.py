@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.conf import settings
 from django.shortcuts import render, redirect
 from models import Post,Post_image
 from django.contrib.auth import (
@@ -16,7 +17,8 @@ from django.contrib.auth.models import User
 from .forms import UserLoginForm,UserRegisterForm
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.contrib import messages
-
+from django.core.mail import send_mail
+import datetime
 # Create your views here.
    
 def Upload(request):
@@ -77,13 +79,15 @@ def view(request):
     if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
         request.session.set_expiry(600000)
         user = request.user
+        now = datetime.datetime.now()
+       # import pdb;pdb.set_trace()
         #dogs=Post.objects.all() #For seeing all entries 
         post= Post.objects.select_related().filter(created_by_user = user).order_by('-created_at')#[:4] #For seeing user specific entries
         # post_image=Post_image.count()
         # posts=Post.objects.count()
         # print post_image
         # print posts
-        context={'posts': post}
+        context={'posts': post , 'now': now}
         return render(request, 'view.html', context)
     else:
         messages.info(request, 'Session Expired')
@@ -166,6 +170,11 @@ def login_view(request):
         username=form.cleaned_data.get('username')
         password=form.cleaned_data.get('password')
         user=authenticate(username=username, password=password)
+        subject='Test registration'
+        message='New user registered./n Welcome to DD.'
+        from_email=settings.EMAIL_HOST_USER
+        to_list=[user.email, settings.EMAIL_HOST_USER]
+        send_mail(subject,message,from_email,to_list,fail_silently=False)
         login(request,user)
        # print (request.user.is_authenticated())
         return redirect("/index")
@@ -180,9 +189,14 @@ def register_view(request):
         password=form.cleaned_data.get("password")
         user.set_password(password)
         user.save()
+        subject='Test registration'
+        message='New user registered./n Welcome to DD.'
+        from_email=settings.EMAIL_HOST_USER
+        to_list=[user.email, settings.EMAIL_HOST_USER]
+        send_mail(subject,message,from_email,to_list,fail_silently=False)
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        return redirect("/login")
+        return redirect("/index")
         
     context = {
         "form": form,

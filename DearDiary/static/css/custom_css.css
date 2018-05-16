@@ -7,8 +7,10 @@
 
 body{
 	
-	font-family: 'Cedarville Cursive', cursive!important;
-	
+	font-family: 'Cedarville Cursive', cursive;
+	font-family: 'Calligraffitti', cursive!important;
+	font-family: 'Quicksand', sans-serif;
+		
 }
 
 .strip {
@@ -254,7 +256,7 @@ padding-right: 0px !important;
 .file > label {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 4px;
   left: 0;
   bottom: 0;
   background-color: slategrey;

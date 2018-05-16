@@ -1,6 +1,5 @@
 
 from django import forms
-from django.core.mail import send_mail
 from django.contrib.auth import (
     authenticate,
     login,
@@ -24,14 +23,7 @@ class UserLoginForm(forms.Form):
         if username and password:
             user=authenticate(username=username, password=password)
             if not user:
-                send_mail(
-                    'Subject here',
-                    'Here is the message.',
-                    'sarthak.tuteja91@gmail.com',
-                    ['sarthak.tuteja@yahoo.com'],
-                    fail_silently=False,
-                )
-                raise forms.ValidationError("Password not correct")
+               raise forms.ValidationError("Password not correct")
    
         return super(UserLoginForm, self).clean(*args, **kwargs)
         

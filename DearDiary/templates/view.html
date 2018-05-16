@@ -19,24 +19,26 @@
         </div>
         </div>
         <div class='row'>
-         <div class="col-md-10">
+         <div class="col-md-6">
              <div class="descrip">
-         <p><small>{{ post.description|truncatechars:250 }}</small>
+         <p>{{ post.description|truncatechars:250 }}
         </p>
 
 </div><!-- descrip ends-->
-<p><small><strong>{{ post.created_at }}</strong></small></p>
+<p><small><strong>{{ post.created_at }} &nbsp; &nbsp; {{ now }}</strong></small></p>
 <!-- <p><small><strong>{{ dog.updated_at }}</strong></small></p> -->
 </div><!-- col-md-9 ends-->
 
-<div class="col-md-2 center">
+<div class="col-md-6 center inline">
    
    {% for image in post.post_image_set.all %}<!--first post is for the "for loop" second post for the post field in model and all is for all images I guess.-->
-   {{ image.image }}
-   <a href='#'><img src='{{ image.image.url }}' class="img img-responsive image " width='100'/> </a><br>
+
+   <div class='col-md-4 pull-right '><a href='#'><img src='{{ image.image.url }}' class="img img-responsive image " width='100'/> </a>
    <div class="middle">
     <div class="text"><a href="/delete-image/{{ image.id }}" class='demo'><i class='fa fa-close'></i></a></div>
   </div>
+  </div>
+   
    {% endfor %}
 
 </div>
@@ -50,6 +52,7 @@
             <img src='{{ image.image.url }}' class="img img-responsive change"/> 
                 <a href="/delete-image/{{ image.id }}" class='demo'>Delete</a><br/>     
 </div>
+
  
      </div><!-- strip ends-->
  {% endfor %}
