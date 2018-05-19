@@ -79,15 +79,25 @@ def view(request):
     if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
         request.session.set_expiry(600000)
         user = request.user
-        now = datetime.datetime.now()
+        today = datetime.datetime.now()
        # import pdb;pdb.set_trace()
         #dogs=Post.objects.all() #For seeing all entries 
         post= Post.objects.select_related().filter(created_by_user = user).order_by('-created_at')#[:4] #For seeing user specific entries
-        # post_image=Post_image.count()
-        # posts=Post.objects.count()
-        # print post_image
-        # print posts
-        context={'posts': post , 'now': now}
+        post_image=Post_image.objects.all().count()
+        posts=Post.objects.filter(created_by_user =user).count()
+        print post_image
+        print posts
+       
+            # import pdb; pdb.set_trace();
+            # form=request.POST['multi_delete']
+        checkbox = request.POST.getlist('checkbox')
+        if request.method== 'POST':
+                print checkbox
+                for check in checkbox:
+                    multi_delete= Post.objects.select_related().filter(Q(created_by_user = user) and Q(id = check))
+                    print multi_delete
+                
+        context={'posts' : post, 'today' : today, 'checkbox' : checkbox }    
         return render(request, 'view.html', context)
     else:
         messages.info(request, 'Session Expired')
@@ -146,6 +156,7 @@ def update(request, id):
     
 
 def delete(request, id):
+    
     dog=Post.objects.get(id=id)
     if dog.created_by_user==request.user:
      post = dog.post_image_set.all()
@@ -209,5 +220,7 @@ def logout_view(request):
     logout(request)
     return redirect("/login")
     
+
+
 
     

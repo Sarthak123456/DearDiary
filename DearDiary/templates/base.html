@@ -31,13 +31,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
-          <a class="nav-link" >
-            <i class="fa fa-fw fa-user"></i>
-             <span class="nav-link-text">{{ user.username }}</span>
-          </a>
-        </li>
-       
+        
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
           <a class="nav-link" href="/index">
             <i class="fa fa-fw fa-home"></i>
@@ -45,7 +39,6 @@
           </a>
         </li>
         
-      
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="View all">
           <a class="nav-link" href="/view">
@@ -54,7 +47,12 @@
           </a>
         </li>
        
-        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Logout">
+          <a class="nav-link" href="/logout">
+            <i class="fa fa-fw fa-sign-out"></i>
+            <span class="nav-link-text">Logout</span>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -80,10 +78,10 @@
           </form>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right">
-          <a class="nav-link" href="/logout">
+          <a class="nav-link" href="/index">
             <i class="fa fa-fw fa-user-circle"></i>
             <span class="nav-link-text">{{ user.id }}</span>
-             <span class="nav-link-text">Logout</span>
+            <span class="nav-link-text">{{ user.username }}</span>
           </a>
         </li>
         

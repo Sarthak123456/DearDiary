@@ -55,4 +55,4 @@ class UserRegisterForm(forms.ModelForm):
         return email
             
    
-   
+  
