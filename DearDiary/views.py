@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.conf import settings
 from django.shortcuts import render, redirect
 from models import Post,Post_image
 from django.contrib.auth import (
@@ -16,7 +17,8 @@ from django.contrib.auth.models import User
 from .forms import UserLoginForm,UserRegisterForm
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.contrib import messages
-
+from django.core.mail import send_mail
+import datetime
 # Create your views here.
    
 def Upload(request):
@@ -30,7 +32,7 @@ def Upload(request):
 def index(request):
     #return HttpResponseRedirect("base.html")
     if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
-        request.session.set_expiry(600)
+        request.session.set_expiry(600000)
         query=request.GET.get('q')
         if query:
             return redirect('/view?q=%s' %query)
@@ -48,18 +50,26 @@ def landing(request):
        # print (request.user.is_authenticated())
         return redirect("/index")
     return render(request, "landing.html", {'form': form, 'title': title})  
-           
+          
 def create(request):
-   
   #  dogs.save()
     user = request.user
     #print (user)
     if request.method=="POST":
-     dog = Post(title=request.POST['title'],
-     description=request.POST['description'],
-     image=request.FILES.get('image'),
-     created_by_user=user,)
-     dog.save()
+        post = Post(title=request.POST['title'],
+        description=request.POST['description'],
+        created_by_user=user,) 
+        post.save()
+        
+        image=request.FILES.getlist('image')
+        for x in image:
+                 post_image = Post_image(
+                 image=x,
+                 post=post
+                    )         
+                 post_image.save()
+        #import pdb;pdb.set_trace()
+        
     return redirect("/")
         
 def error(request):
@@ -67,20 +77,27 @@ def error(request):
     
 def view(request):
     if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
-        request.session.set_expiry(600)
+        request.session.set_expiry(600000)
         user = request.user
-    
-        # dogs=Post.objects.all() #For seeing all entries 
-        dogs= Post.objects.filter(created_by_user = user).order_by('-created_at')#[:4] #For seeing user specific entries
-        query=request.GET.get('q')
-        if query:
-            dogs=dogs.filter(
-                Q(title__icontains=query)|
-                Q(description__icontains=query)|
-                Q(created_at__icontains=query)
-        
-            ).distinct()
-        context={ 'dogs': dogs}
+        today = datetime.datetime.now()
+       # import pdb;pdb.set_trace()
+        #dogs=Post.objects.all() #For seeing all entries 
+        post= Post.objects.select_related().filter(created_by_user = user).order_by('-created_at')#[:4] #For seeing user specific entries
+        post_image=Post_image.objects.all().count()
+        posts=Post.objects.filter(created_by_user =user).count()
+        print post_image
+        print posts
+       
+            # import pdb; pdb.set_trace();
+            # form=request.POST['multi_delete']
+        checkbox = request.POST.getlist('checkbox')
+        if request.method== 'POST':
+                print checkbox
+                for check in checkbox:
+                    multi_delete= Post.objects.select_related().filter(Q(created_by_user = user) and Q(id = check)).delete()
+                    print multi_delete
+                
+        context={'posts' : post, 'today' : today, 'checkbox' : checkbox }    
         return render(request, 'view.html', context)
     else:
         messages.info(request, 'Session Expired')
@@ -88,47 +105,71 @@ def view(request):
     
     
 def final(request, id):
-    
     dog=Post.objects.get(id=id)
-    context={"dog": dog}
-    return render(request, 'final.html', context)
+    if dog.created_by_user==request.user:
+        if request.user.is_authenticated():
+            request.session.set_expiry(600)
+            context={"dog": dog}
+            return render(request, 'final.html', context)
+        else:
+            messages.info(request, 'Session Expired')
+            return redirect("/login")
+    else:
+        pass
+   
     
 def edit(request, id):
-    if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
-        request.session.set_expiry(600)
-        query=request.GET.get('q')
-        if query:
-            return redirect('/view?q=%s' %query)
-        dog=Post.objects.get(id=id)
-        context={"dog": dog}
-        return render(request, 'edit.html', context)
+    dog=Post.objects.get(id=id)
+    if dog.created_by_user==request.user:
+        
+        if request.user.is_authenticated(): #or request.session.get_expiry_age()> 10):
+            request.session.set_expiry(600000)
+            query=request.GET.get('q')
+            if query:
+                return redirect('/view?q=%s' %query)
+            context={"dog": dog}
+            return render(request, 'edit.html', context)
+        else:
+            messages.info(request, 'Session Expired')
+            return redirect("/login")
     else:
-        messages.info(request, 'Session Expired')
-        return redirect("/login")
+        pass
     
 def update(request, id):
     dog=Post.objects.get(id=id)
-    dog.title=request.POST['title']
-    dog.description=request.POST['description']
-    if dog.image == None:
-        dog.image=request.FILES.get('image')
-    elif dog.image != None:
-        if request.FILES.get('image') != None:
-             dog.image=request.FILES.get('image')
-        else:
-            dog.image== dog.image
-    #dog.image=request.FILES.get('image')
-    dog.save()
-    return redirect('/view')
+    if dog.created_by_user==request.user:
+        
+        dog.title=request.POST['title']
+        dog.description=request.POST['description']
+        if dog.image == None:
+            dog.image=request.FILES.get('image')
+        elif dog.image != None:
+            if request.FILES.get('image') != None:
+                 dog.image=request.FILES.get('image')
+            else:
+                dog.image== dog.image
+        #dog.image=request.FILES.get('image')
+        dog.save()
+        return redirect('/view')
+    else:
+        pass
     
 
 def delete(request, id):
+    
     dog=Post.objects.get(id=id)
-    dog.delete()
-    return redirect('/view')
+    if dog.created_by_user==request.user:
+     post = dog.post_image_set.all()
+     post.delete()
+     dog.delete()
+     return redirect('/view')
+     
+    else:
+        pass
 
 def delete_image(request, id):
-    Post.objects.get(id=id).image.delete(save=True)
+    post = Post_image.objects.get(id=id)
+    post.delete()
     return HttpResponseRedirect(('/view'))
     
 
@@ -140,6 +181,11 @@ def login_view(request):
         username=form.cleaned_data.get('username')
         password=form.cleaned_data.get('password')
         user=authenticate(username=username, password=password)
+        subject='Test registration'
+        message='New user registered./n Welcome to DD.'
+        from_email=settings.EMAIL_HOST_USER
+        to_list=[user.email, settings.EMAIL_HOST_USER]
+        send_mail(subject,message,from_email,to_list,fail_silently=False)
         login(request,user)
        # print (request.user.is_authenticated())
         return redirect("/index")
@@ -154,9 +200,14 @@ def register_view(request):
         password=form.cleaned_data.get("password")
         user.set_password(password)
         user.save()
+        subject='Test registration'
+        message='New user registered./n Welcome to DD.'
+        from_email=settings.EMAIL_HOST_USER
+        to_list=[user.email, settings.EMAIL_HOST_USER]
+        send_mail(subject,message,from_email,to_list,fail_silently=False)
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        return redirect("/login")
+        return redirect("/index")
         
     context = {
         "form": form,
@@ -165,6 +216,6 @@ def register_view(request):
     return render(request, "form.html", context)
     
 def logout_view(request):
+    
     logout(request)
     return redirect("/login")
-    

@@ -27,11 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = [u'2b5cbf3294174e5cb85c8cda01fcd0b6.vfs.cloud9.us-east-2.amazonaws.com', u'b3093ba437444fdc8f411148dcb6a507.vfs.cloud9.us-east-2.amazonaws.com']
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'Sarthak'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sarthak.tuteja91@gmail.com'
+EMAIL_HOST_PASSWORD = 'phophucklai'
+EMAIL_PORT = 25
+DEFAULT_FROM_EMAIL = 'sarthak.tuteja91@gmail.com'
+EMAIL_USE_SSL = True
 
 # Application definition
 

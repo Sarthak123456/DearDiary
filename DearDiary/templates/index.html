@@ -10,7 +10,7 @@
         <div class="col-12">
         <form action="" id="image_form" name="image_form"  method="POST" enctype="multipart/form-data"  role="form">
          {% csrf_token %}
-         <input type="text" class="form-control col-md-12" name="title" placeholder="Title" id="title" required/>
+         <input type="text" class="form-control col-md-12" name="title" placeholder="Title" id="title" required />
          <br>
           <label for="description"><textarea rows="15" cols="180" class="form-control" name="description" id="description" placeholder="Description" required></textarea>
           </label>
@@ -21,7 +21,7 @@
           <div class='col-md-4'>
             <div class="file">
               <label for="image"><i class='fa fa-upload'></i>  Select a file </label>
-              <input type="file" name="image" id="image">
+              <input type="file" name="image" id="image" multiple>
             </div>
              
           </div>

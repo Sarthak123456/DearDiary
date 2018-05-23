@@ -1,6 +1,5 @@
 
 from django import forms
-from django.core.mail import send_mail
 from django.contrib.auth import (
     authenticate,
     login,
@@ -24,21 +23,14 @@ class UserLoginForm(forms.Form):
         if username and password:
             user=authenticate(username=username, password=password)
             if not user:
-                send_mail(
-                    'Subject here',
-                    'Here is the message.',
-                    'sarthak.tuteja91@gmail.com',
-                    ['sarthak.tuteja@yahoo.com'],
-                    fail_silently=False,
-                )
-                raise forms.ValidationError("Password not correct")
+               raise forms.ValidationError("Password not correct")
    
         return super(UserLoginForm, self).clean(*args, **kwargs)
         
         
 class UserRegisterForm(forms.ModelForm):
-    email= forms.EmailField(label=' Confirm Email')
-    email2= forms.EmailField(label=' Email')
+    email= forms.EmailField(label='Email')
+    # email2= forms.EmailField(label=' Email')
     
     password=forms.CharField(widget=forms.PasswordInput)
     class Meta:
@@ -47,16 +39,15 @@ class UserRegisterForm(forms.ModelForm):
             
             'username',
             'password',
-            'email2',
             'email'
             ]
             
     def clean_email(self):
         email=self.cleaned_data.get('email')
-        email2=self.cleaned_data.get('email2')
+        # email2=self.cleaned_data.get('email2')
         
-        if email!= email2:
-            raise forms.ValidationError('Emails must match')
+        # if email!= email2:
+        #     raise forms.ValidationError('Emails must match')
         email_qs=User.objects.filter(email=email)
         if email_qs.exists():
             raise forms.ValidationError("User already there!")
@@ -64,4 +55,4 @@ class UserRegisterForm(forms.ModelForm):
         return email
             
    
-   
+  

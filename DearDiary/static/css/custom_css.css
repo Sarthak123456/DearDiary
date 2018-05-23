@@ -5,6 +5,14 @@
     For .omb_spanOr use @body-bg instead of white.
 */
 
+body{
+	
+	font-family: 'Cedarville Cursive', cursive;
+	font-family: 'Calligraffitti', cursive!important;
+	font-family: 'Quicksand', sans-serif;
+		
+}
+
 .strip {
 	border:1px black;
 	padding:20px;
@@ -120,6 +128,7 @@ padding-right: 0px !important;
 	
 	min-height: 200px!important;
 	margin-top:40px;
+	height:300px;
 }
 .scrollbar{
 	overflow:hidden;
@@ -148,12 +157,7 @@ padding-right: 0px !important;
 .middle {
   transition: .5s ease;
   opacity: 0;
-  position: absolute;
-  top: 7%;
-  left: 62%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
+  
 }
 
  .center:hover .image {
@@ -252,13 +256,26 @@ padding-right: 0px !important;
 .file > label {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 4px;
   left: 0;
   bottom: 0;
-  background-color: red;
+  background-color: slategrey;
   color: #fff;
   border-radius: 5px;
   line-height: 30px;
   text-align: center;
   cursor: pointer
+}
+
+.error{
+	
+	font-family: sans-serif;
+	color: silver;
+	text-align: center;
+	opacity:0.5;
+	
+}
+
+.deleteBtn{
+	display: none
 }

@@ -8,7 +8,7 @@ from django.contrib import admin
 from .models import Post,Post_image
 
 class PostAdmins(admin.ModelAdmin):
-    search_fields = ["created_by_user__username"]
+   model = Post_image
 
 class PostImageInline(admin.TabularInline):
     model = Post
