@@ -94,7 +94,7 @@ def view(request):
         if request.method== 'POST':
                 print checkbox
                 for check in checkbox:
-                    multi_delete= Post.objects.select_related().filter(Q(created_by_user = user) and Q(id = check))
+                    multi_delete= Post.objects.select_related().filter(Q(created_by_user = user) and Q(id = check)).delete()
                     print multi_delete
                 
         context={'posts' : post, 'today' : today, 'checkbox' : checkbox }    

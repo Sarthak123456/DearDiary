@@ -7,7 +7,7 @@
         {% if posts %}
         <form name='multi_delete' action ='' id='multi_delete' value='multi_delete' method='post'>
                 {% csrf_token %}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="form-check-input"   value="Delete"><br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="form-check-input deleteBtn demo"  value="Delete"  ><br><br>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="form-check-input"  name='checkAll' id='checkAll' value="{{ post.id }}">
     {% for post in posts %}
     </div>
@@ -20,7 +20,7 @@
             
             <div class="form-check">
       <label class="form-check-label">
-        <input type="checkbox" class="form-check-input"  name='checkbox' id='checkbox' value="{{ post.id }}">
+        <input type="checkbox" class="form-check-input checkbox"  name='checkbox'  value="{{ post.id }}">
         
       </label>
     </div>
@@ -31,7 +31,7 @@
          <h6><a href="/final/{{ post.id }}" class="nav-link js-create-book" data-toggle="modal" data-target="#exampleModal">{{ post.title|title }}</a></h6>
          </div>
           <div class='col-md-4'>
-         <a  href="/delete/{{ post.id }}" class='demo'><i class="fa fa-trash pull-right"></i></a>
+         <a  href="/delete/{{ post.id }}" class='demo'><i class="fa fa-close pull-right"></i></a>
         <a  href="/edit/{{ post.id }}" class='' ><i class="fa fa-pencil pull-right"></i></a>
         </div>
         </div>
@@ -59,7 +59,7 @@
    {% endfor %}
    
 {% else %}
-<h1 class='error' >No image!ADD ONE?</h1>
+<h1 class='error' >No image, Add one or many!</h1>
 {% endif %}
    
 </div>

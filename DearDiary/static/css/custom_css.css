@@ -272,5 +272,10 @@ padding-right: 0px !important;
 	font-family: sans-serif;
 	color: silver;
 	text-align: center;
+	opacity:0.5;
 	
+}
+
+.deleteBtn{
+	display: none
 }
