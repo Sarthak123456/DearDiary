@@ -279,3 +279,7 @@ padding-right: 0px !important;
 .deleteBtn{
 	display: none
 }
+
+.inline-flex{
+	display: inline-flex;
+}

@@ -83,12 +83,11 @@ def view(request):
        # import pdb;pdb.set_trace()
         #dogs=Post.objects.all() #For seeing all entries 
         post= Post.objects.select_related().filter(created_by_user = user).order_by('-created_at')#[:4] #For seeing user specific entries
-        post_image=Post_image.objects.all().count()
-        posts=Post.objects.filter(created_by_user =user).count()
-        print post_image
-        print posts
-       
-            # import pdb; pdb.set_trace();
+        # post_image=Post_image.objects.all()
+        # posts=Post.objects.filter(created_by_user =user).count()
+        # # print post_image[0]
+        # # print posts
+                 # import pdb; pdb.set_trace();
             # form=request.POST['multi_delete']
         checkbox = request.POST.getlist('checkbox')
         if request.method== 'POST':

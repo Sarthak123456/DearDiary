@@ -48,7 +48,7 @@
 </div><!-- col-md-9 ends-->
 
 <div class="col-md-6 center inline">
-    
+    <h1 class='btn btn-primary images'>Images</h1>
     {% if post.post_image_set.all %}
    {% for image in post.post_image_set.all %}<!--first post is for the "for loop" second post for the post field in model and all is for all images I guess.-->
 
@@ -65,32 +65,29 @@
 {% endif %}
    
 </div>
-
-
-      <div class='img-modal'>
-       <a class='image' href='#'>
+  <div class='img-modal'>
+       <a class='clear' href='#'>
        <div class='title'>
        <i class='fa fa-close'></i>
      </div></a>
-            <img src='' class="img img-responsive change"/> 
-                <a href="/delete-image/{{ image.id }}" class='demo'>Delete</a><br/>     
-                 {% for post in posts %}
-              {% for image in post.post_image_set.all %}<!--first post is for the "for loop" second post for the post field in model and all is for all images I guess.-->
-
-   <div class='col-md-4 pull-right '><a href='#'><img src='{{ image.image.url }}' class="img img-responsive images " width='100'/> </a>
-   <div class="middle">
-    <div class="text"><i class='fa fa-close'></i></div>
-  </div>
-  </div>
-   
-   {% endfor %}
-                 {% endfor %}
+     <a href='#' class='btn btn-warning previous'>Previous</a>
+            <img src='' class="img img-responsive change"/>
+            <a href='#' class='btn btn-warning next'>Next</a>
+                <a href="/delete-image/{{ image.id }}" class='demo'>Delete</a><br/>   
+                
+               
+            
+                 <div class='inline-flex'>
+   </div>
+                
 </div>
 
 
+
  
-     </div><!-- strip ends-->
+     </div>
  {% endfor %}
+ 
   </form>
  
  {% else %}
