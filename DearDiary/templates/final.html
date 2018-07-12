@@ -17,7 +17,7 @@
             </div>
               
 {% for image in dog.post_image_set.all %}
-              <div class='col-md-4'>
+              <div class='col-md-2'>
             <a href='#'><img src='{{ image.image.url }}' class="img img-responsive replace" width='100'/> </a>
                 {% endfor %}
          </div>

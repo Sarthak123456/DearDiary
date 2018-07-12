@@ -239,72 +239,88 @@ $('.inline-flex').find('img').map(function() { return this.src; }).get();
     y = $(".change").attr("src", x);
     
 });
-    
 
 
+$(document).ready(function(e) {
 
- $('.image').click(function(e){
-
-});
-  
-$('.previous').click(function(e){
-var images = $('.inline-flex').find('img').map(function() { return this.src; }).get();
-   for(var i= images.length;i>=0;i--){
-    x=images[i];
-    y = $(".change").attr("src", x);}
-});
-
-$(".image").click(function(e){
-    
-  });
-  
    $('body').on('click', '.image', function(e){
     var src= $(this).attr('src');
     $('.change').attr('src', src);
     $('.img-modal').toggleClass('showing');
     $('body').toggleClass('scrollbar');
     var addressValue = $(this).closest('.strip').find('.col-md-8').find('a').attr('href');
-    // var addressValue = $(this).parent('div').parent("div").parent("div").find('.col-md-8').find('a').attr('href');
-    console.log(addressValue);
          $.ajax({
       url: addressValue,
       type: 'get',
       success: function(data) {
         var jq=jQuery(data);
-        var title = jq.find(".col-md-4");
+        var title = jq.find(".col-md-2");
         $(document).find('.inline-flex').html(title);
     }
     });
-    
-        setTimeout(function() {
-var images =$('.inline-flex').find('.replace').map(function() { return this.src; }).get(); 
-
- var l= $(this).attr('src');
- var t = ('https://2b5cbf3294174e5cb85c8cda01fcd0b6.vfs.cloud9.us-east-2.amazonaws.com/' + l);
- 
+   
+     var t = ('https://2b5cbf3294174e5cb85c8cda01fcd0b6.vfs.cloud9.us-east-2.amazonaws.com' + $(this).attr('src'));
+     setTimeout(function() {
+ var images = $('.inline-flex').find('.replace').map(function() { return this.src; }).get(); 
  console.log(images);
-  console.log(l);
- console.log(t);
+  console.log('images.length() : ' + images.length);
  
  for (var p =0; p<=images.length; p++){
      var i = jQuery.inArray(t, images);
- }
-
+     console.log('i in image array: ' + i);
+     }
  $('.next').click(function(e){
-     if(i<=images.length){
-          console.log(i)
+        console.log('i: before ' + i);
+      if(i<=images.length-2){
+         console.log('images.length : '+ images.length);
     i=i+1;
-     console.log(i)
+     console.log('i: after ' + i);
      $(".change").attr("src", images[i]);
-     console.log('if: ' + $(this).index());
+      console.log('if index : ' + $(this).index());
+      console.log('if iamge url: ' + images[i]);
+    
      }
      
-     else if (i>=images.length){
+     else if (i>images.length-2 ){
          i = 0;
           y = $(".change").attr("src", images[i]);
           console.log('else: ' + images[i]);
      }
-
+     
+     else{
+         console.log('Image not foind in aray!')
+     }
     });
+    
+    
+     $('.previous').click(function(e){
+        console.log('i: before ' + i);
+      if(i<=images.length){
+         console.log('images.length : '+ images.length);
+    i=i-1;
+     console.log('i: after ' + i);
+     $(".change").attr("src", images[i]);
+      console.log('if index : ' + $(this).index());
+      console.log('if iamge url: ' + images[i]);
+    
+     }
+     
+     else if (i>images.length){
+         i = images.length;
+          y = $(".change").attr("src", images[i]);
+          console.log('i else if: ' + i);
+     }
+     
+     else{
+         console.log('Image not foind in aray!')
+     }
+    });
+
     }, 607);
+    
+    
+    
+   });    
+
 });
+
