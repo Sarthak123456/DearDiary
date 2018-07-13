@@ -16,11 +16,18 @@
             {{ dog.description|linebreaks }}
             </div>
               
-{% for image in dog.post_image_set.all %}
-              <div class='col-md-2'>
-            <a href='#'><img src='{{ image.image.url }}' class="img img-responsive replace" width='100'/> </a>
+<div class="col-md-3">
+    {% if dog.post_image_set.all %}
+      {% for image in dog.post_image_set.all %}
+            <a href='#'><img src='{{ image.image.url }}' class="img img-responsive image" width='300'/> </a>
+                <a href="/delete-image/{{ dog.id }}" class='demo'>Delete</a></p>
                 {% endfor %}
-         </div>
+             {% else %}
+    <h3 class='error'>No Entry yet!!Please add entry.</h3>
+                {% endif %}
+                
+                 <a class="btn btn-primary" href="/edit/{{ dog.id }}">Edit</a>
+            </div>
             
           </div><hr>
           
@@ -28,6 +35,10 @@
       </div>
     </div>
 
-              
+              {% for image in dog.post_image_set.all %}
+              <div class='col-md-2'>
+            <a href='#'><img src='{{ image.image.url }}' class="img img-responsive replace" width='100'/> </a>
+                {% endfor %}
+         </div>
          
   

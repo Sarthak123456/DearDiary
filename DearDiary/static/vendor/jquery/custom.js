@@ -1,3 +1,8 @@
+
+$(window).on('load', function() {
+            $('#loading').fadeOut(1000);
+            
+        });
 $(".js-create-book").click(function(e){
     var addressValue = $(this).attr("href");
         e.preventDefault();
@@ -238,12 +243,56 @@ $(document).on('click','.replace',function(e){
 $('.inline-flex').find('img').map(function() { return this.src; }).get();
     y = $(".change").attr("src", x);
     
+     var t = ('https://2b5cbf3294174e5cb85c8cda01fcd0b6.vfs.cloud9.us-east-2.amazonaws.com' + $(this).attr('src'));
+     
+     
+     setTimeout(function() {
+         
+ var images = $('.inline-flex').find('.replace').map(function() { return this.src; }).get();
+ 
+ for (var p =0; p<=images.length; p++){
+     var i = jQuery.inArray(t, images);
+     }
+ $('.next').click(function(e){
+       if(i<=images.length-2){
+    i=i+1;
+     $(".change").attr("src", images[i]);
+    
+     }
+     
+     else if (i>images.length-2 ){
+         i = 0;
+          y = $(".change").attr("src", images[i]);
+     }
+     
+     else{
+         console.log('Image not found in aray!');
+     }
+    });
+    
+    
+     $('.previous').click(function(e){
+    if(i<=images.length-1 && i>0){
+    i=i-1;
+     $(".change").attr("src", images[i]);
+     }
+     
+     else if (i<=0){
+         i = images.length-1;
+          y = $(".change").attr("src", images[i]);
+     }
+     
+     else{
+         console.log('Image not foind in aray!');
+     }
+    });
+
+    }, 607);
+    
 });
 
-
-$(document).ready(function(e) {
-
-   $('body').on('click', '.image', function(e){
+    
+   $(document).on('click','.image', function(e){
     var src= $(this).attr('src');
     $('.change').attr('src', src);
     $('.img-modal').toggleClass('showing');
@@ -260,67 +309,51 @@ $(document).ready(function(e) {
     });
    
      var t = ('https://2b5cbf3294174e5cb85c8cda01fcd0b6.vfs.cloud9.us-east-2.amazonaws.com' + $(this).attr('src'));
+     
+     
      setTimeout(function() {
- var images = $('.inline-flex').find('.replace').map(function() { return this.src; }).get(); 
- console.log(images);
-  console.log('images.length() : ' + images.length);
+         
+ var images = $('.inline-flex').find('.replace').map(function() { return this.src; }).get();
  
  for (var p =0; p<=images.length; p++){
      var i = jQuery.inArray(t, images);
-     console.log('i in image array: ' + i);
      }
  $('.next').click(function(e){
-        console.log('i: before ' + i);
-      if(i<=images.length-2){
-         console.log('images.length : '+ images.length);
+       if(i<=images.length-2){
     i=i+1;
-     console.log('i: after ' + i);
      $(".change").attr("src", images[i]);
-      console.log('if index : ' + $(this).index());
-      console.log('if iamge url: ' + images[i]);
     
      }
      
      else if (i>images.length-2 ){
          i = 0;
           y = $(".change").attr("src", images[i]);
-          console.log('else: ' + images[i]);
      }
      
      else{
-         console.log('Image not foind in aray!')
+         console.log('Image not found in aray!');
      }
     });
     
     
      $('.previous').click(function(e){
-        console.log('i: before ' + i);
-      if(i<=images.length){
-         console.log('images.length : '+ images.length);
+    if(i<=images.length-1 && i>0){
     i=i-1;
-     console.log('i: after ' + i);
      $(".change").attr("src", images[i]);
-      console.log('if index : ' + $(this).index());
-      console.log('if iamge url: ' + images[i]);
-    
      }
      
-     else if (i>images.length){
-         i = images.length;
+     else if (i<=0){
+         i = images.length-1;
           y = $(".change").attr("src", images[i]);
-          console.log('i else if: ' + i);
      }
      
      else{
-         console.log('Image not foind in aray!')
+         console.log('Image not foind in aray!');
      }
     });
 
     }, 607);
     
-    
-    
    });    
 
-});
 
