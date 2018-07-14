@@ -20,6 +20,8 @@
    </div>
                 
 </div>
+
+
         {% if posts %}
         <form name='multi_delete' action ='' id='multi_delete' value='multi_delete' method='post'>
                 {% csrf_token %}
@@ -95,4 +97,39 @@
 
 {% endif %}
 </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <h5 class="modal-title" id="exampleModalLabel">{{ dog.title|title }}</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+                      </div>
+          <div class="modal-body">
+            <div class='row'>
+              <div class='col-md-9'>
+            {{ dog.description|linebreaks }}
+            </div>
+              
+<div class="col-md-3">
+    {% if dog.post_image_set.all %}
+      {% for image in dog.post_image_set.all %}
+            <a href='#'><img src='{{ image.image.url }}' class="img img-responsive image" width='300'/> </a>
+                <a href="/delete-image/{{ dog.id }}" class='demo'>Delete</a></p>
+                {% endfor %}
+             {% else %}
+    <h3 class='error'>No Entry yet!!Please add entry.</h3>
+                {% endif %}
+                
+                 <a class="btn btn-primary" href="/edit/{{ dog.id }}">Edit</a>
+            </div>
+            
+          </div><hr>
+          
+        </div>
+      </div>
+    </div>
  {% endblock %}
