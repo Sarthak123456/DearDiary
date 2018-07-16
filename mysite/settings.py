@@ -32,9 +32,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sarthak.tuteja91@gmail.com'
 EMAIL_HOST_PASSWORD = 'phophucklai'
-EMAIL_PORT = 25
+EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'sarthak.tuteja91@gmail.com'
-EMAIL_USE_SSL = True
+# EMAIL_USE_SSL = True
 
 # Application definition
 
@@ -162,7 +162,7 @@ MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/login'
 LOGOUT_URL = '/logout'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/index'
 
 SOCIAL_AUTH_GITHUB_KEY = 'c85e3567600969382486'
 SOCIAL_AUTH_GITHUB_SECRET = 'ad81856cd47e0aaef67dec9da3f53731e15ddffc'

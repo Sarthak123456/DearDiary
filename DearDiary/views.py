@@ -181,10 +181,10 @@ def login_view(request):
         password=form.cleaned_data.get('password')
         user=authenticate(username=username, password=password)
         subject='Test registration'
-        message='New user registered./n Welcome to DD.'
+        message='New user registered.\n Welcome to DD.'
         from_email=settings.EMAIL_HOST_USER
         to_list=[user.email, settings.EMAIL_HOST_USER]
-        send_mail(subject,message,from_email,to_list,fail_silently=False)
+        send_mail(subject,message,from_email,to_list,fail_silently=True)
         login(request,user)
        # print (request.user.is_authenticated())
         return redirect("/index")
