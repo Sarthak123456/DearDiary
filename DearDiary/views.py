@@ -39,6 +39,8 @@ def index(request):
         return render(request, "index.html")   
     else:
         return redirect("/login")
+        
+
 def landing(request):
     form=UserLoginForm(request.POST or None)
     title='Sign In'
@@ -83,6 +85,14 @@ def view(request):
        # import pdb;pdb.set_trace()
         #dogs=Post.objects.all() #For seeing all entries 
         post= Post.objects.select_related().filter(created_by_user = user).order_by('-created_at')#[:4] #For seeing user specific entries
+        query=request.GET.get('q')
+        if query:
+            post=post.filter(
+                Q(title__icontains=query)|
+                Q(description__icontains=query)|
+                Q(created_at__icontains=query)
+        
+            ).distinct()
         # post_image=Post_image.objects.all()
         # posts=Post.objects.filter(created_by_user =user).count()
         # # print post_image[0]
@@ -96,13 +106,13 @@ def view(request):
                     multi_delete= Post.objects.select_related().filter(Q(created_by_user = user) and Q(id = check)).delete()
                     print multi_delete
                 
-        context={'posts' : post, 'today' : today, 'checkbox' : checkbox }    
+        context={'posts' : post, 'today' : today, 'checkbox' : checkbox}    
         return render(request, 'view.html', context)
     else:
         messages.info(request, 'Session Expired')
         return redirect("/login")
     
-    
+   
 def final(request, id):
     dog=Post.objects.get(id=id)
     if dog.created_by_user==request.user:
@@ -180,15 +190,17 @@ def login_view(request):
         username=form.cleaned_data.get('username')
         password=form.cleaned_data.get('password')
         user=authenticate(username=username, password=password)
-        subject='Test registration'
-        message='New user registered.\n Welcome to DD.'
+        print(settings.EMAIL_BACKEND)
+        subject=('User Login.')
+        message='User ' + user.username + ' logged in.'
         from_email=settings.EMAIL_HOST_USER
-        to_list=[user.email, settings.EMAIL_HOST_USER]
-        send_mail(subject,message,from_email,to_list,fail_silently=True)
+        to_list=[settings.EMAIL_HOST_USER]
+        send_mail(subject,message,from_email,to_list,fail_silently=False)
         login(request,user)
        # print (request.user.is_authenticated())
         return redirect("/index")
         
+       
     return render(request, "form.html", {"form": form, "title" : title})
 
 def register_view(request):
@@ -199,8 +211,8 @@ def register_view(request):
         password=form.cleaned_data.get("password")
         user.set_password(password)
         user.save()
-        subject='Test registration'
-        message='New user registered./n Welcome to DD.'
+        subject=('Welcome to DearDiary')
+        message='Hi ' + user.username + ',\nThank You for joining us.\nFeel free to get to us at https://www.facebook.com/deardiary.gq/ for any suggestions or queries.\nEnjoy!'
         from_email=settings.EMAIL_HOST_USER
         to_list=[user.email, settings.EMAIL_HOST_USER]
         send_mail(subject,message,from_email,to_list,fail_silently=False)

@@ -31,7 +31,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sarthak.tuteja91@gmail.com'
-EMAIL_HOST_PASSWORD = 'phophucklai'
+EMAIL_HOST_PASSWORD = 'uzkodpmlhqunsdqq'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'sarthak.tuteja91@gmail.com'
 # EMAIL_USE_SSL = True
@@ -53,7 +53,6 @@ INSTALLED_APPS = [
 
 CRISPY_TEMPLATE_PACK="bootstrap3"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 TEMPLATE_DIRS = (
     "DearDiary/templates/",
@@ -72,8 +71,8 @@ MIDDLEWARE = [
 ]
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE=  True
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL='/login/'
+# LOGIN_URL = '/index/'
+# LOGIN_REDIRECT_URL='/'
 
 ROOT_URLCONF = 'mysite.urls'
 
