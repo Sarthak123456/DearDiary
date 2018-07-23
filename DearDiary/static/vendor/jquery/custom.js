@@ -1,6 +1,6 @@
 
 $(window).on('load', function() {
-            $('#loading').fadeOut(1000);
+            $('#loading').fadeOut(100);
             
         });
 $(".js-create-book").click(function(e){

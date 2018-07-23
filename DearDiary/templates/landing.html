@@ -48,7 +48,11 @@ href="#">DearDiary</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" data-toggle="modal" data-target="#LoginModal">Login/Sign Up</a>
+              {% if user.is_authenticated %}
+              <a class="nav-link" href='/view'>{{user.username}}</a>
+              {% else %}
+              <a class="nav-link" data-toggle="modal" data-target="#LoginModal">Login/Sign-up</a>
+              {% endif %}
             </li>
             
           </ul>
@@ -65,7 +69,7 @@ href="#">DearDiary</a>
 class="container">
           <h1 class="masthead-heading mb-0">Dear Diary</h1>
           <h2 class="masthead-subheading mb-0">A secret friend, who is more than a Friend!</h2>
-          <a href="/index" class="btn btn-primary btn-xl rounded-pill mt-5">Get Started</a>
+          <a href="/view" class="btn btn-primary btn-xl rounded-pill mt-5">Get Started</a>
         </div>
       </div>
      
@@ -88,7 +92,7 @@ class="row align-items-center">
           <div class="col-lg-6 order-lg-1">
             <div class="p-5">
               <h2 class="display-4">For Your Thoughts..</h2>
-              <p>Everyone has a public life, but Dear Diary is made kept in mind your private life. 
+              <p>It's an online DiaryEntry platform. Everyone has a public life, but Dear Diary is made kept in mind your private life. 
     Share all the thoughts you wouldn't share with your friends, family or anyone!
     
     </p>

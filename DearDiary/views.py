@@ -26,7 +26,7 @@ def Upload(request):
      dog = Post_image(
      image=request.FILES.get('image'))
      dog.save()
-    return redirect('/index')
+    return redirect('/view')
     
 
 def index(request):
@@ -43,14 +43,18 @@ def index(request):
 
 def landing(request):
     form=UserLoginForm(request.POST or None)
-    title='Sign In'
-    if form.is_valid():
-        username=form.cleaned_data.get('username')
-        password=form.cleaned_data.get('password')
-        user=authenticate(username=username, password=password)
-        login(request,user)
-       # print (request.user.is_authenticated())
-        return redirect("/index")
+    user = request.user
+    if request.user.is_authenticated():
+        title= user.username
+        login(request, user, backend='social_core.backends.facebook.FacebookOAuth2')
+    else:
+        title='Sign-In'
+        if form.is_valid():
+           username=form.cleaned_data.get('username')
+           password=form.cleaned_data.get('password')
+           user=authenticate(username=username, password=password)
+           login(request,user)
+           return redirect("/view")
     return render(request, "landing.html", {'form': form, 'title': title})  
           
 def create(request):
@@ -86,6 +90,14 @@ def view(request):
         #dogs=Post.objects.all() #For seeing all entries 
         post= Post.objects.select_related().filter(created_by_user = user).order_by('-created_at')#[:4] #For seeing user specific entries
         query=request.GET.get('q')
+        
+    if request.user.is_authenticated:
+        subject=('User Login.')
+        message='User ' + user.username + ' logged in.'
+        from_email=settings.EMAIL_HOST_USER
+        to_list=[settings.EMAIL_HOST_USER]
+        send_mail(subject,message,from_email,to_list,fail_silently=False)
+        
         if query:
             post=post.filter(
                 Q(title__icontains=query)|
@@ -198,8 +210,13 @@ def login_view(request):
         send_mail(subject,message,from_email,to_list,fail_silently=False)
         login(request,user)
        # print (request.user.is_authenticated())
-        return redirect("/index")
-        
+        return redirect("/view")
+    if request.user.is_authenticated:
+        subject=('User Login.')
+        message='User ' + user.username + ' logged in.'
+        from_email=settings.EMAIL_HOST_USER
+        to_list=[settings.EMAIL_HOST_USER]
+        send_mail(subject,message,from_email,to_list,fail_silently=False)
        
     return render(request, "form.html", {"form": form, "title" : title})
 
@@ -218,7 +235,7 @@ def register_view(request):
         send_mail(subject,message,from_email,to_list,fail_silently=False)
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        return redirect("/index")
+        return redirect("/view")
         
     context = {
         "form": form,
