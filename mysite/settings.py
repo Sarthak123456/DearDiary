@@ -25,7 +25,7 @@ SECRET_KEY = '%-xd9_&ae0q5d9e0$gr_210hkl+*xnbb7gztn_&mb%*h^8hvpn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'mydiary.ga', u'2b5cbf3294174e5cb85c8cda01fcd0b6.vfs.cloud9.us-east-2.amazonaws.com']
+ALLOWED_HOSTS = [u'127.0.0.1' ,u'mydiary.ga', u'2b5cbf3294174e5cb85c8cda01fcd0b6.vfs.cloud9.us-east-2.amazonaws.com']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
@@ -161,7 +161,7 @@ MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/login'
 LOGOUT_URL = '/logout'
-LOGIN_REDIRECT_URL = '/index'
+LOGIN_REDIRECT_URL = '/view'
 
 SOCIAL_AUTH_GITHUB_KEY = 'c85e3567600969382486'
 SOCIAL_AUTH_GITHUB_SECRET = 'ad81856cd47e0aaef67dec9da3f53731e15ddffc'
@@ -173,4 +173,4 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id,name,email', 
 }
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
-SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.11'
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True

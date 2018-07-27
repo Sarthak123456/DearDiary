@@ -211,13 +211,6 @@ def login_view(request):
         login(request,user)
        # print (request.user.is_authenticated())
         return redirect("/view")
-    if request.user.is_authenticated:
-        subject=('User Login.')
-        message='User ' + user.username + ' logged in.'
-        from_email=settings.EMAIL_HOST_USER
-        to_list=[settings.EMAIL_HOST_USER]
-        send_mail(subject,message,from_email,to_list,fail_silently=False)
-       
     return render(request, "form.html", {"form": form, "title" : title})
 
 def register_view(request):
